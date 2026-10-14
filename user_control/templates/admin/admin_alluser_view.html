@@ -1,0 +1,76 @@
+{% extends 'reusable_components/page.html' %}
+
+{% load static %}
+
+<body>
+    {% block content %}
+    
+<div class="container emp-profile">
+        
+ <div class="container">
+  <h2>All Customers</h2>
+  <p></p>            
+        <div class="row">
+                                        <div class="col-md-12">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"> </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover">
+                                            
+                                                <tr class="text-primary">
+                                                    <th>S/N</th>
+                                                    <th>Email</th>
+                                                    <th>Phone</th>
+                                                    <th>City</th>
+                                                    <th>Address</th>
+                                                    <th>Edit</th>
+                                                    <th>Active Status</th>
+                                                    <th>Delete</th>
+
+                                                    
+                                                </tr>
+                                                
+
+                                    <!-- used for User fetch section -->
+                                    {% if data %}
+                                      {%for User in data %}
+       							
+                                                <tr>
+                                                        <td>{{ forloop.counter}} </td>
+                                                        <td>{{ User.email }} </td>
+                                                        <td>{{ User.phone }} </td>
+                                                        <td>{{ User.city }} </td>
+                                                        <td>{{ User.address }} </td>
+                                                        <td><a style="color:blue;text-decoration:underline" href="{% url 'edit_user' User.id %}">Edit Profile</a></td>
+                                                        <td>
+                                                        {% if User.status == 1 %}
+                                                            <strong>Activated</strong>
+                                                            {% else %}
+                                                            <form action="{% url "AdminAllUsersActive" User.id %}" method="POST">
+                                                                {% csrf_token %}
+                                                                <button  type="submit" class='simple-btn'>Activate</button>
+                                                            </form>
+
+
+                                                            {% endif %}
+                                                        </td>
+                                                        <td>
+                                                            <a href='{% url "AdminAllUsersDelete" User.id %}' class='delete-btn radius'>Delete </a>
+                                                            </td>
+
+                                                </tr>
+                                              {% endfor %}	
+                                            {% endif %}
+                                            </table>
+                                            
+                                        </div>
+                                    </div>	
+
+                                    </div>
+                                    
+                                    </div>
+
+</div>
+    </div>
+    <!--================USer Details =================-->
+{% endblock %}

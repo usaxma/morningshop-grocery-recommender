@@ -1,0 +1,247 @@
+
+{% extends 'reusable_components/page.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+  <!--================Checkout Area =================-->
+  <section class="checkout_area section_padding">
+
+    <div class="container">
+      {% if add_order %}
+
+        {% if success %}
+          <h2>Thank you for submitting your order. It will be Dispatched Soon. Your Order ID is: {{order_id}}</h2>
+
+          </h2>
+          <span> Redirecting you Back to homepage...</span>
+          <script>
+
+            setTimeout(function() {
+              window.location.href = '{% url "siteHome" %}';
+            },1500);
+
+          </script>
+
+        {% else %}
+        <h2>There was an error submitting your order. Please refresh the page and try again.</h2>
+        {% endif %}
+
+      {% else %}
+      <div class="billing_details">
+        <div class="row">
+
+
+
+          <form class="row contact_form" action="" method="post" novalidate="novalidate">
+
+          <div class="col-lg-7">
+            <h3>Billing Details</h3>
+
+              {% csrf_token %}
+              
+              <div class="row" style="margin: 0px;">
+                <div class="col-md-6 form-group p_star">
+                  <input type="text" class="form-control" id="first" name="name" placeholder="First Name*" value="{{userData.name}}">
+                </div>
+                <div class="col-md-6 form-group p_star">
+                  <input type="text" class="form-control" id="last" name="lname" placeholder="Last Name*" value="{{userData.lname}}">
+                </div>
+              </div>
+
+              <div class="row" style="margin: 0px;">
+                <div class="col-md-6 form-group p_star">
+                  <input type="text" class="form-control" id="number" name="phone" placeholder="Phone Number*" value="{{userData.phone}}">
+                </div>
+                <div class="col-md-6 form-group p_star">
+                  <input type="text" class="form-control" id="email" name="email" placeholder="Email Address*" value="{{userData.email}}">
+                </div>
+              </div>
+
+              <div class="col-md-12 form-group p_star">
+                <select class="country_select" style="display: none;" name="country" value="{{userData.country}}">
+                  <option value="Pakistan">Pakistan</option>
+                  <option value="Afghanistan">Afghanistan</option>
+                  <option value="Turkey">Turky</option>
+                  <option value="Iran">Iran</option>
+                  <option value="Malaysia">Malasya</option>
+                </select>
+                <div class="nice-select country_select" tabindex="0">
+                  <span class="current">Country</span>
+                  <ul class="list">
+                    <li data-value="Pakistan" class="option selected">Pakistan</li>
+                    <li data-value="Afghanistan" class="option">Afghanistan</li>
+                    <li data-value="Turkey" class="option">Turkey</li>
+                    <li data-value="Iran" class="option">Iran</li>
+                    <li data-value="Malaysia" class="option">Malaysia</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="add1" name="addr_1" placeholder="Address Line 01*" value="{{userData.addr_1}}">
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="add2" name="addr_2" placeholder="Address Line 02" value="{{userData.addr_2}}">
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <input type="text" class="form-control" id="city" name="city" placeholder="Town/City*" value="{{userData.city}}">
+              </div>
+              <div class="col-md-12 form-group p_star">
+                <select class="country_select" style="display: none;" name="district" value="{{userData.distric}}">
+                  <option value="Attock">Attock</option>
+                  <option value="Bahawalnagar">Bahawalnagar</option>
+                  <option value="Bahawalpur">Bahawalpur</option>
+                  <option value="Bhakkar">Bhakkar</option>
+                  <option value="Chakwal">Chakwal</option>
+                  <option value="Chiniot">Chiniot</option>
+                  <option value="Dera Ghazi Khan">Dera Ghazi Khan</option>
+                  <option value="Faisalabad">Faisalabad</option>
+                  <option value="Gujranwala">Gujranwala</option>
+                  <option value="Gujrat">Gujrat</option>
+                  <option value="Hafizabad">Hafizabad</option>
+                  <option value="Jhang">Jhang</option>
+                  <option value="Jhelum">Jhelum</option>
+                  <option value="Kasur">Kasur</option>
+                  <option value="Khanewal">Khanewal</option>
+                  <option value="Khushab">Khushab</option>
+                  <option value="Lahore">Lahore</option>
+                  <option value="Layyah">Layyah</option>
+                  <option value="Lodhran">Lodhran</option>
+                  <option value="Mandi Bahauddin">Mandi Bahauddin</option>
+                  <option value="Mianwali">Mianwali</option>
+                  <option value="Multan">Multan</option>
+                  <option value="Muzaffargarh">Muzaffargarh</option>
+                  <option value="Narowal">Narowal</option>
+                  <option value="Nankana Sahib">Nankana Sahib</option>
+                  <option value="Okara">Okara</option>
+                  <option value="Pakpattan">Pakpattan</option>
+                  <option value="Rahim Yar Khan">Rahim Yar Khan</option>
+                  <option value="Rajanpur">Rajanpur</option>
+                  <option value="Rawalpindi">Rawalpindi</option>
+                  <option value="Sahiwal">Sahiwal</option>
+                  <option value="Sargodha">Sargodha</option>
+                  <option value="Sheikhupura">Sheikhupura</option>
+                  <option value="Sialkot">Sialkot</option>
+                  <option value="Toba Tek Singh">Toba Tek Singh</option>
+                  <option value="Vehari">Vehari</option>
+                </select>
+                <div class="nice-select country_select" tabindex="0">
+                  <span class="current">District</span>
+                  <ul class="list">
+                    <li data-value="District" class="option selected">District</li>
+                    <li data-value="Attock" class="option">Attock</li>
+                    <li data-value="Bahawalnagar" class="option">Bahawalnagar</li>
+                    <li data-value="Bahawalpur" class="option">Bahawalpur</li>
+                    <li data-value="Bhakkar" class="option">Bhakkar</li>
+                    <li data-value="Chakwal" class="option">Chakwal</li>
+                    <li data-value="Chiniot" class="option">Chiniot</li>
+                    <li data-value="Dera Ghazi Khan" class="option">Dera Ghazi Khan</li>
+                    <li data-value="Faisalabad" class="option">Faisalabad</li>
+                    <li data-value="Gujranwala" class="option">Gujranwala</li>
+                    <li data-value="Gujrat" class="option">Gujrat</li>
+                    <li data-value="Hafizabad" class="option">Hafizabad</li>
+                    <li data-value="Jhang" class="option">Jhang</li>
+                    <li data-value="Jhelum" class="option">Jhelum</li>
+                    <li data-value="Kasur" class="option">Kasur</li>
+                    <li data-value="Khanewal" class="option">Khanewal</li>
+                    <li data-value="Khushab" class="option">Khushab</li>
+                    <li data-value="Lahore" class="option">Lahore</li>
+                    <li data-value="Layyah" class="option">Layyah</li>
+                    <li data-value="Lodhran" class="option">Lodhran</li>
+                    <li data-value="Mandi Bahauddin" class="option">Mandi Bahauddin</li>
+                    <li data-value="Mianwali" class="option">Mianwali</li>
+                    <li data-value="Multan" class="option">Multan</li>
+                    <li data-value="Muzaffargarh" class="option">Muzaffargarh</li>
+                    <li data-value="Narowal" class="option">Narowal</li>
+                    <li data-value="Nankana Sahib" class="option">Nankana Sahib</li>
+                    <li data-value="Okara" class="option">Okara</li>
+                    <li data-value="Pakpattan" class="option">Pakpattan</li>
+                    <li data-value="Rahim Yar Khan" class="option">Rahim Yar Khan</li>
+                    <li data-value="Rajanpur" class="option">Rajanpur</li>
+                    <li data-value="Rawalpindi" class="option">Rawalpindi</li>
+                    <li data-value="Sahiwal" class="option">Sahiwal</li>
+                    <li data-value="Sargodha" class="option">Sargodha</li>
+                    <li data-value="Sheikhupura" class="option">Sheikhupura</li>
+                    <li data-value="Sialkot" class="option">Sialkot</li>
+                    <li data-value="Toba Tek Singh" class="option">Toba Tek Singh</li>
+                    <li data-value="Vehari" class="option">Vehari</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-12 form-group">
+                <input type="text" class="form-control" id="zip" name="zip_code" placeholder="Postcode/ZIP" value="{{userData.zip_code}}">
+              </div>
+            <!-- </form> -->
+            
+          </div>
+
+
+          <div class="col-lg-5">
+            <div class="order_box">
+              <h2>Your Order</h2>
+              
+              <ul class="list">
+                <li>
+                  <a href="#">Product
+                    <span>Total</span>
+                  </a>
+                </li>
+              
+              {% for product in cartData  %}
+              
+                <li>
+                  <a href="#">{{product.name}}
+                    <span class="middle">x {{product.quantity}}</span>
+                    <span class="last">PKR {{product.total}}</span>
+                  </a>
+                </li>
+
+              {% endfor %}
+
+              </ul>
+
+
+              <ul class="list list_2">
+                <li>
+                  <a href="#">Total
+                    <span>PKR {{cartTotal}}</span>
+                  </a>
+                </li>
+              </ul>
+              <div class="payment_item">
+                <div class="radion_btn">
+                  <input type="radio" id="f-option5" name="selector" checked="true">
+                  <label for="f-option5">Cash on delivery</label>
+                  <div class="check"></div>
+                </div>
+                <p>
+                  Please send a check to Store Name, Store Street, Store Town,
+                  Store State / County, Store Postcode.
+                </p>
+              </div>
+              
+              <div class="creat_account">
+                <input type="checkbox" id="f-option4" name="selector">
+                <label for="f-option4">I’ve read and accept the </label>
+                <a href="#">terms &amp; conditions*</a>
+              </div>
+              <button class="btn_3" type="submit">Proceed to Checkout</button>
+            </div>
+          </div>
+
+          </form>
+
+
+        </div>
+
+      </div>
+
+      {% endif %}
+    </div>
+
+  </section>
+  <!--================End Checkout Area =================-->
+
+{% endblock %}

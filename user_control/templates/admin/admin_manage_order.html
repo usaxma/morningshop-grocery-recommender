@@ -1,0 +1,112 @@
+{% extends 'reusable_components/page.html' %}
+{% load static %}
+{% load mathfilters %}
+<body>
+    {% block content %}
+
+<div class="container">
+        
+ <section class="confirmation_part ">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+
+        </div>
+        <div class="col-lg-6 col-lx-4">
+          <div class="single_confirmation_details">
+            <h4>order info</h4>
+            <ul>
+              <li>
+                <p>order number</p><span>: {{order.id}}</span>
+              </li>
+              <li>
+                <p>data</p><span>: {{order.created_at}}</span>
+              </li>
+              <li>
+                <p>total</p><span>: PKR {{order.total}}</span>
+              </li>
+              <li>
+                <p>Payment method</p><span>: Cash on Delivery</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6 col-lx-4">
+          <div class="single_confirmation_details">
+            <h4>Billing Address</h4>
+            <ul>
+              <li>
+                <p>Address</p><span>: {{order.shipping_addr_1}}</span>
+              </li>
+
+              <li>
+                <p>City</p><span>: {{order.shipping_city}}</span>
+              </li>
+              <li>
+                <p>Country</p><span>: {{order.shipping_country}}</span>
+              </li>
+              <li>
+                <p>Postcode</p><span>:{{order.shipping_zip}} </span>
+              </li>
+
+
+              {% if order.shipping_status == 0 %}
+              </ul>
+              <div class="row no-gutters" style="margin-top: 20px;">
+
+                <form action="/user_account/all_orders/" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="id" value="{{order.id}}"/>
+                  <input type="submit" class="simple-btn" Value="Click To Confirm">
+                </form>
+
+              </div>
+            {% else %}
+                <li>
+                  <p>Status:</p><span class="text-success">Shipped</span>
+                </li>
+            </ul>
+            {% endif %}
+
+
+
+
+
+
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="order_details_iner">
+            <h3>Order Details</h3>
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" colspan="2">Product</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+              <tfoot>
+                {% if lineItems %}
+                  {% for lineItem in lineItems %}
+                <tr>
+                  <th scope="col" >{{ lineItem.product_id.name }}</th>
+                  <th scope="col" colspan="2">{{ lineItem.quantity }}</th>
+                  <th scope="col">PKR: {{ lineItem.quantity |mul:lineItem.product_id.price }} /-</th>
+                </tr>
+                {% endfor %}
+              {% endif %}
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+{% endblock %}

@@ -1,0 +1,133 @@
+{% extends 'reusable_components/page.html' %}
+
+{% load static %}
+
+{% block content %}
+     
+    <main>
+
+
+        <!-- Latest Products Start -->
+        <section class="latest-product-area padding-bottom" style="margin-top:30px;" >
+            <div class="container">
+                <div class="row product-btn d-flex justify-content-end align-items-end">
+                    <!-- Section Tittle -->
+                    <div class="col-xl-12 col-lg-12 col-md-12">
+                        <div class="section-tittle mb-30">
+                            {% if searchTerm is not False %}
+                            <h2>You Searched for "{{ searchTerm }}":</h2>
+                            {% else %}
+                            <h2>Nothing found for your Search Term:</h2>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                </div>
+                <!-- Nav Card -->
+                <div class="tab-content" id="nav-tabContent">
+                    <!-- card one -->
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="row">
+
+                            {% if number_of_products < 1 %}
+
+                                <h4>No Product matches your search term.</h4>
+
+                            {% endif %}
+
+                            {% for Product in  products %}
+
+                            <div class="col-xl-4 col-lg-4 col-md-6">
+
+
+                                <div class="single-product mb-60">
+                                    <div class="product-img">
+                                        <img src="{{Product.featured_img_url}}"" alt="">
+                                    </div>
+
+                                    <div class="product-caption">
+                                        <div class="product-ratting">
+                                        {% if rating in Product %}
+                                        {% if Product.rating >= 1 %}
+                                            <i id='star1' class="far fa-star"></i>
+                                        {% else %}
+                                        <i id='star1'  onmousedown="Product_rating(1,{{Product.id}})" class="far fa-star low-star"></i>
+                                        {% endif %}
+
+
+                                        {% if Product.rating >= 2 %}
+                                            <i id='star2' class="far fa-star"></i>
+                                        {% else %}
+                                        <i id='star2' onmousedown="Product_rating(2,{{Product.id}})" class="far fa-star low-star"></i>
+                                        {% endif %}
+
+                                        {% if Product.rating >= 3 %}
+                                            <i id='star3' class="far fa-star"></i>
+                                        {% else %}
+                                        <i id='star3' onmousedown="Product_rating(3,{{Product.id}})" class="far fa-star low-star"></i>
+                                        {% endif %}
+
+
+                                        {%if Product.rating >= 4 %}
+                                            <i id='star4' class="far fa-star"></i>
+                                        {% else %}
+                                        <i id='star4' onmousedown="Product_rating(4,{{Product.id}})" class="far fa-star low-star"></i>
+                                        {% endif %}
+
+
+                                        {%if Product.rating >= 5 %}
+                                            <i id='start5' class="far fa-star"></i>
+                                        {% else %}
+                                        <i id='star5' onmousedown="Product_rating(5,{{ Product.id }})" class="far fa-star low-star"></i>
+                                        {% endif %}
+
+
+                                            {% comment %} <i id='star2' class="far fa-star"></i>
+                                            <i id='star3' class="far fa-star low-star"></i>
+                                            <i id='star4' class="far fa-star low-star"></i>
+                                            <i id='star5' onmousedown="Product_Rating()" class="far fa-star low-star"></i> {% endcomment %}
+                                            {% endif %}
+                                        </div>
+                                        <h4><a href="{% url "single-product" Product.id %}"><p>{{Product.name}}<p/></a></h4>
+                                        <div class="price">
+                                            <ul>
+                                                <li>PKR:{{Product.price}}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            
+                            
+                        </div>
+                    </div>
+                    <script>
+
+                    function Product_rating(rating_star,proudct_id) {
+                            
+                        var csrfToken = '{{ csrf_token }}'; 
+                        $.ajax({
+                            method: "POST",                        
+                            url: "/shop/product_rating/",
+                            data: { csrfmiddlewaretoken:csrfToken, rating_star : rating_star, proudct_id : proudct_id }
+                        })
+
+                        .done(function() 
+                        {
+                            alert( "Rate this Product successfuly");
+                        }); 
+                    
+                           
+                    }
+                    </script>
+
+            </div>
+        </section>
+        <!-- Latest Products End -->
+
+
+
+
+    </main>        <!-- Gallery End-->
+{% endblock %}

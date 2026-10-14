@@ -1,0 +1,56 @@
+{% extends 'reusable_components/page.html' %}
+
+{% load static %}
+
+
+
+{% block content %}
+
+      <div class="container emp-profile">
+        
+ <div class="container">
+  <h2>Order Details</h2>
+  <p></p>            
+<table class="table  table-striped">
+    <tr>
+        <th>Order ID</th>
+        <th>Customer Name</th>
+        <th>Phone</th>
+        <th>Address 1</th>
+       <th>Status</th>
+        <th>Total</th>
+        <th>Order date</th>
+        <th>View</th>
+
+
+    </tr>
+   
+    {%for Order in Orders %}
+        <tr>
+           <td> {{ forloop.counter }}</td>
+            <td> {{Order.shipping_name}}</td>
+            <td>{{Order.shipping_phone}}</td>
+            <td>{{Order.shipping_addr_1}}</td>
+           <td>
+            {% if Order.shipping_status == 1 %}
+            <p class="text-success">Confirmed</p>
+            {% else %}
+            <p>Pending</p>
+            {% endif %}
+            </td>
+            <td>PKR: {{Order.total}}</td>
+            <td>{{Order.created_at}}</td>
+            
+            <td> <a href="/user_account/manage_order/{{Order.id}}" class="simple-btn">View</a> </td>
+            
+        </tr>
+    {% endfor %}
+</table>
+
+</div>
+    </div>
+
+
+
+
+{% endblock %}

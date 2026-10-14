@@ -1,0 +1,221 @@
+{% extends 'reusable_components/page.html' %}
+
+{% load static %}
+
+{% block content %}
+     
+    <main>
+
+        <!-- slider Area Start -->
+        <div class="slider-area ">
+            <!-- Mobile Menu -->
+            <div class="slider-active">
+                <div class="single-slider slider-height" data-background="{% static 'img/hero/h1_hero.jpg'">
+                    <div class="container">
+                        <div class="row d-flex align-items-center justify-content-between">
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 d-none d-md-block">
+                                <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
+                                    <img style="width:100%;" src="{% static 'img/hero/sale_hero_cover.png' %}" alt="">
+                                </div>
+                            </div>
+                            <div class="col-xl-5 col-lg-5 col-md-5 col-sm-8">
+                                <div class="hero__caption">
+                                    <span data-animation="fadeInRight" data-delay=".4s">60% Discount</span>
+                                    <h1 data-animation="fadeInRight" data-delay=".6s">Summer SALE <br> Collection</h1>
+                                    <p data-animation="fadeInRight" data-delay=".8s">Best Items for this Summer!</p>
+                                    <!-- Hero-btn -->
+                                    <div class="hero__btn" data-animation="fadeInRight" data-delay="1s">
+                                        <!-- <a href="industries.html" class="btn hero-btn">Shop Now</a>                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- slider Area End-->
+
+
+        <!-- Latest Products Start -->
+        <section class="latest-product-area padding-bottom" style="margin-top:30px;" >
+            <div class="container">
+                <div class="row product-btn d-flex justify-content-end align-items-end">
+                    <!-- Section Tittle -->
+                    <div class="col-xl-4 col-lg-5 col-md-5">
+                        <div class="section-tittle mb-30">
+                            <h2>Latest Products</h2>
+                        </div>
+                    </div>
+                    <div class="col-xl-8 col-lg-7 col-md-7">
+                        <div class="properties__button f-right">
+                            <!--Nav Button  -->
+                            <nav>                                                                                                
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">All</a>
+                                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">New</a>
+                                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Featured</a>
+                                    <a class="nav-item nav-link" id="nav-last-tab" data-toggle="tab" href="#nav-last" role="tab" aria-controls="nav-contact" aria-selected="false">Offer</a>
+                                </div>
+                            </nav>
+                            <!--End Nav Button  -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Nav Card -->
+                <div class="tab-content" id="nav-tabContent">
+                    <!-- card one -->
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                        <div class="row">
+                           
+                            {% for Product in  products %}
+
+                            <div class="col-xl-4 col-lg-4 col-md-6">
+
+
+                                <div class="single-product mb-60">
+                                    <div class="product-img">
+                                        <img src="{{Product.featured_img_url}}"" alt="">
+                                    </div>
+
+                                    <div class="product-caption">
+                                        <div class="product-ratting">
+                                        {% if rating in Product %}
+                                        {% if Product.rating >= 1 %}
+                                            <i id='star1' class="far fa-star"></i>
+                                        {% else %}
+                                        <i id='star1'  onmousedown="Product_rating(1,{{Product.id}})" class="far fa-star low-star"></i>
+                                        {% endif %}
+
+
+                                        {% if Product.rating >= 2 %}
+                                            <i id='star2' class="far fa-star"></i>
+                                        {% else %}
+                                        <i id='star2' onmousedown="Product_rating(2,{{Product.id}})" class="far fa-star low-star"></i>
+                                        {% endif %}
+
+                                        {% if Product.rating >= 3 %}
+                                            <i id='star3' class="far fa-star"></i>
+                                        {% else %}
+                                        <i id='star3' onmousedown="Product_rating(3,{{Product.id}})" class="far fa-star low-star"></i>
+                                        {% endif %}
+
+
+                                        {%if Product.rating >= 4 %}
+                                            <i id='star4' class="far fa-star"></i>
+                                        {% else %}
+                                        <i id='star4' onmousedown="Product_rating(4,{{Product.id}})" class="far fa-star low-star"></i>
+                                        {% endif %}
+
+
+                                        {%if Product.rating >= 5 %}
+                                            <i id='start5' class="far fa-star"></i>
+                                        {% else %}
+                                        <i id='star5' onmousedown="Product_rating(5,{{ Product.id }})" class="far fa-star low-star"></i>
+                                        {% endif %}
+
+
+                                            {% comment %} <i id='star2' class="far fa-star"></i>
+                                            <i id='star3' class="far fa-star low-star"></i>
+                                            <i id='star4' class="far fa-star low-star"></i>
+                                            <i id='star5' onmousedown="Product_Rating()" class="far fa-star low-star"></i> {% endcomment %}
+                                            {% endif %}
+                                        </div>
+                                        <h4><a href="{% url "single-product" Product.id %}"><p>{{Product.name}}<p/></a></h4>
+                                        <div class="price">
+                                            <ul>
+                                                <li>PKR:{{Product.price}}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            
+                            
+                        </div>
+                    </div>
+                    <script>
+
+                    function Product_rating(rating_star,proudct_id) {
+                            
+                        var csrfToken = '{{ csrf_token }}'; 
+                        $.ajax({
+                            method: "POST",                        
+                            url: "/shop/product_rating/",
+                            data: { csrfmiddlewaretoken:csrfToken, rating_star : rating_star, proudct_id : proudct_id }
+                        })
+
+                        .done(function() 
+                        {
+                            alert( "Rate this Product successfuly");
+                        }); 
+                    
+                           
+                    }
+                    </script>
+
+            </div>
+        </section>
+        <!-- Latest Products End -->
+
+
+
+        <!-- Latest Offers Start -->
+        <div class="latest-wrapper lf-padding">
+            <div class="latest-area latest-height d-flex align-items-center" data-background="{% static '/img/collection/latest-offer.png' %}">
+                <div class="container">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-xl-5 col-lg-5 col-md-6 offset-xl-1 offset-lg-1">
+                            <div class="latest-caption">
+                                <h2>Get Our<br>Latest Products On your Mobile Phone</h2>
+                                <p>Subscribe to our Phone Notifications</p>
+                            </div>
+                        </div>
+                         <div class="col-xl-5 col-lg-5 col-md-6 ">
+                            <div class="latest-subscribe">
+                                <form action="#">
+                                    <input type="email" placeholder="Your phone number here">
+                                    <button>Subscribe</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- man Shape -->
+            </div>
+        </div>
+        <!-- Latest Offers End -->
+        <!-- Shop Method Start-->
+        <div class="shop-method-area section-padding30">
+            <div class="container">
+                <div class="row d-flex justify-content-between">
+                    <div class="col-xl-3 col-lg-3 col-md-6">
+                        <div class="single-method mb-40">
+                            <i class="ti-package"></i>
+                            <h6>Free Shipping Method</h6>
+                            <p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6">
+                        <div class="single-method mb-40">
+                            <i class="ti-unlock"></i>
+                            <h6>Secure Payment System</h6>
+                            <p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
+                        </div>
+                    </div> 
+                    <div class="col-xl-3 col-lg-3 col-md-6">
+                        <div class="single-method mb-40">
+                            <i class="ti-reload"></i>
+                            <h6>Secure Payment System</h6>
+                            <p>aorem ixpsacdolor sit ameasecur adipisicing elitsf edasd.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Shop Method End-->
+
+
+    </main>        <!-- Gallery End-->
+{% endblock %}

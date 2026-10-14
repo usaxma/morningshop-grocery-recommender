@@ -1,0 +1,101 @@
+{% extends 'reusable_components/page.html' %}
+
+{% load static %}
+
+
+
+{% block content %}
+
+      <section class="checkout_area section_padding">
+
+        <div class="container">
+            <h2>Welcome, Admin!</h2>
+
+
+
+            <div class="row kpi-block">
+
+                <div class="col-sm-4 ">
+                    <div class="kpi-wrap bg-blue">
+                        <h3>{{ totalOrders | length }}</h3>
+                        <span>Total orders</span>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="kpi-wrap bg-green">
+                    <h3>{{ totalProducts | length}}</h3>
+                    <span>Total products</span>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="kpi-wrap bg-purple">
+                    <h3>{{ totalUsers | length }}</h3>
+                    <span>Total users</span>
+                    </div>
+                </div>
+
+            </div>
+<!--            KPI Blocks End here -->
+
+            <div class="row recent-orders">
+
+                <div class="col-sm-6">
+                    <h3>Recent orders</h3>
+
+                    <div class="row recent-order-wrap">
+
+                        {% for order in lastOrders %}
+
+                            <div class="col-sm-12 order-block">
+                                <span>ID: {{order.id}} - PKR: {{order.total}}</span>
+                                <span class="customer_name">{{ order.shipping_name }}   -   <a href="/user_account/manage_order/{{order.id}}">View Order</a></span>
+                            </div>
+
+                        {% endfor %}
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+<!--                Recent users-->
+
+                <div class="col-sm-6">
+                    <h3>Recent Customer Signups</h3>
+
+                    <div class="row recent-order-wrap">
+
+                        {% for customer in lastUsers %}
+                        <div class="col-sm-12 order-block">
+                            <span>{{customer.first_name}} {{customer.last_name}}</span>
+                            <span class="customer_name">{{customer.username}}</span>
+                        </div>
+
+                        {% endfor %}
+
+
+                    </div>
+
+
+
+                </div>
+
+
+
+            </div>
+
+
+
+        </div>
+    </section>
+
+
+
+
+{% endblock %}

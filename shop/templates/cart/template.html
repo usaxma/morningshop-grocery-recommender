@@ -1,0 +1,98 @@
+
+{% extends 'reusable_components/page.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+
+<div class="container">
+
+<div class="slider-area " style="margin-bottom: 35px;">
+        <!-- Mobile Menu  -->
+        <div class="single-slider slider-height2 d-flex align-items-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>Cart</h2>
+                        </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="cart_inner">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Product</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Quantity</th>
+                  <th scope="col">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+
+                {% if cartData  %}
+                  {% for item in cartData %}
+                <tr>
+                  <td>
+                    <div class="media">
+                      <div class="d-flex">
+                        <img src="{% static '/img/product_images/' %}{{item.featured_img}}" alt="">
+                      </div>
+                      <div class="media-body">
+                        <p>{{ item.name }}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <h5>PKR {{ item.price }}</h5>
+                  </td>
+                  <td>
+                    <div class="product_count">
+                      <input class="input-number" type="text" readonly="true" value="{{ item.quantity }}" min="0" max="10">
+                    </div>
+                  </td>
+                  <td>
+                    <h5 style="font-family: Arial;font-size: 17px;"> PKR {{ item.total }}</h5>
+                  </td>
+                </tr>
+                  {% endfor %}
+                {% endif %}
+
+
+
+                <tr>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <h5>Subtotal</h5>
+                  </td>
+                  <td>
+                    <h5 style="font-size: 23px;font-family: Arial;font-weight: Bold;">
+                      PKR {{ totalOrderValue }}
+                    </h5>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+            
+            <div class="checkout_btn_inner float-right">
+              <form style="display: inline-block;" method="POST" action="{% url "cart" %}"> {% csrf_token %} <button class="btn_3" type="submit">Clear Cart</button></form>
+              <a class="btn_1" href="{% url "siteHome" %}">Continue Shopping</a>
+              <a class="btn_1 checkout_btn_1" href="{% url "checkout" %}">Proceed to checkout</a>
+            </div>
+          </div>
+          
+        </div>
+        
+</div>
+
+
+{% endblock %}

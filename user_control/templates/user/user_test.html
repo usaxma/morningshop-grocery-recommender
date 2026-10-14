@@ -1,0 +1,45 @@
+{% extends 'reusable_components/page.html' %}
+
+{% load static %}
+
+<body>
+{% block content %}
+ 
+
+ <script type="text/javascript">
+  	function chk()
+  	{
+  		var id= document.getElementById('id').value;
+  		var  datastring= 'id='+id;
+  		$.ajax({
+  					type:"post",
+  					url:"{% url "user_get_id" Product.id %}",
+  					data:datastring,
+  					cache:false,
+  					success: function(data)
+					{
+  						
+						var video = JSON.parse(data);
+						document.getElementById("pk").innerHTML=video.a;
+						document.getElementById("uk").innerHTML=video.b;
+						
+  					}
+
+  				});
+  		return false;
+
+  	}
+
+  </script>
+
+  	<label>Name</label><input type="text" name="id" id="id">
+	<input type="submit" name="submit" value="click" onclick="chk();">
+
+    <br/>
+	<p id="pk">
+	<p id="uk">
+
+    <!--================login_part end =================-->
+{% endblock %}
+
+

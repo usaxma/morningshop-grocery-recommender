@@ -1,0 +1,94 @@
+{% extends 'reusable_components/page.html' %}
+
+{% load static %}
+
+<body>
+    {% block content %}
+    
+<div class="container emp-profile">
+ <div class="container">
+
+        <div class="row">
+            <div class="col-sm-12" style="margin-bottom:20px">
+
+                <h2>All Orders by {{ user.mainUser.first_name }} {{ user.mainUser.last_name }}</h2>
+
+            </div>
+        </div>
+
+
+            <div class="row">
+
+                <div class="col-sm-12">
+
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <th>Order Total</th>
+                                <th>Shipping Status</th>
+                                <th>Order Date</th>
+                            </tr>
+                            {% if totalOrders > 1 %}
+
+                                {% for order in orders %}
+                                <tr>
+
+                                    <td>{{ order.id }}</td>
+                                    <td>PKR: {{ order.total }}/-</td>
+                                    <td>
+                                        {% if order.shipping_status == 1 %}
+                                            <strong style="color:green">Shipped</strong>
+                                        {% else %}
+                                            Pending
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ order.created_at }}</td>
+
+
+                                </tr>
+                                {% endfor %}
+
+                            {% else %}
+
+                                <tr>
+                                    <td>{{ orders.id }}</td>
+                                    <td>PKR: {{ orders.total }}/-</td>
+                                    <td>
+                                        {% if orders.shipping_status == 1 %}
+                                            <strong style="color:green">Shipped</strong>
+                                        {% else %}
+                                            Pending
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ orders.created_at }}</td>
+
+
+                                </tr>
+
+                            {% endif %}
+
+
+
+
+                        </tbody>
+
+
+
+
+
+
+
+                    </table>
+
+
+
+                </div>
+
+
+            </div>
+ 
+    </div>
+ </div>   
+    <!--================USer Details =================-->
+{% endblock %}

@@ -1,0 +1,161 @@
+{% extends 'reusable_components/page.html' %}
+
+{% load static %}
+
+<body>
+    {% block content %}
+
+   
+
+    <!-- slider Area Start-->
+    
+    <!-- slider Area End-->
+
+    <!--================Sign Up  Area =================-->
+    <section class=" section_padding ">
+    {{ error }}
+        <div class="container">
+            <div class="row">
+            <div class="col-lg-6 col-md-2">
+                    <div class="login_part_text text-center">
+                        <div class="login_part_text_iner">
+                            <h2>New to our Shop?</h2>
+                            <p>There are advances being made in science and technology
+                                everyday, and a good example of this is the</p>
+                            <a href="#" class="btn_3">Create an Account</a>
+                        </div>
+                    </div>
+                </div>
+                  
+                <div class="col-lg-6 col-md-10">
+                    <h3>Update Super Users</h3>
+                    <div class="container-fluid">
+					<form class="class="panel panel-info form-horizontal" action="/user_account/add_user/" Method="POST">
+				<div class="panel-body">
+                {% csrf_token %}
+                    
+				<div class="form-group row">
+                        <label for="Email" class="control-label col-md-2"> 
+                            Email: {{User.Email}} 1
+                        </label>
+                        <div class="col-md-8">
+                            <input type="email" id="Email" name="Email" value="{{User.Email}}"class="form-control" placeholder="e.g: Guest@domain.om" required/>
+                        </div>
+				</div>
+				<div class="form-group row">
+				<label for="Password" class="control-label col-md-2">
+                 Password:
+                 </label>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="password" id="Password" name="Password" class="form-control" placeholder="Password" required/>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <input type="password" id="RePassword" name="RePassword" class="form-control" placeholder="Comfirm" required/>
+                            </div>	
+                        </div>
+                    </div>
+				</div>
+
+
+                <div class="form-group row">
+				<label for="name" class="control-label col-md-2">
+                 Name:
+                 </label>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" id="FirstName" name="FirstName" class="form-control" placeholder="First Name" required/>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <input type="text" id="LastName" name="LastName" class="form-control" placeholder="Last Name" required/>
+                            </div>	
+                        </div>
+                    </div>
+				</div>
+
+				<div class="form-group row">
+					<label class="control-label col-md-2">DOB:</label> 	
+					<div class=" col-md-8">
+					<input type="date" name="DateOfBirth" class="form-control" required/>	
+					</div>
+				</div>
+				
+
+				  <div class="form-group row">
+				<label for="name" class="control-label col-md-2">
+                 Address 2:
+                 </label>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="text" id="City" name="City" class="form-control" placeholder="City" required/>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <input type="text" id="Country" name="Country" class="form-control" placeholder="Country" required/>
+                            </div>	
+                        </div>
+                    </div>
+				</div>
+
+
+				<div class="form-group row">
+				<label for="email"class="control-label col-md-2">Gender:</label>
+				<div class="col-md-8">
+				<label><input type="radio" name="Gender" value="Male" checked>Male</label>
+				  <label><input type="radio" name="Gender" value="Female">Female</label>
+				</div>
+				</div>	
+
+				<div class="form-group row">
+				<label for="email"class="control-label col-md-2">zipCode:</label>
+				<div class="col-md-8">
+				<input type="number" name="zipCode" id="zipCode" class="form-control" placeholder="e.g: " required/>
+				</div>
+				</div>
+
+
+				<div class="form-group row">
+					<label for="Phone" class="control-label col-md-2">Phone:</label>
+					<div class="col-md-8">
+						<input type="number" name="Phone" class="form-control" placeholder="e.g: 03045636135" required/>
+					</div>
+				</div>
+                <div class="form-group row">
+				<label for="pass"class="control-label col-md-2">Address:</label>
+				<div class="col-md-8">
+				<textarea name="Address" cols="12" rows="6" class="form-control" placeholder="Address"></textarea>
+				</div>
+				</div>
+
+                <div class="form-group row">
+					<label for="Phone" class="control-label">User Type:</label>
+					<div class="col-md-12">
+                        <select name="account_type" class="form-control">
+                            <option value="Admin">Admin</option>
+                            <option value="Manager">Manager</option>
+                            </select>
+                    </div>
+				</div>
+				
+				<div class="form-group row ">
+					<div class=" col-md-1"></div>
+				<button type="submit" value="submit" name="submit" class="btn btn-success col-md-4" onclick=""><span class="glyphicon glyphicon-send"></span> Register</button>
+				<div class=" col-md-1"></div>
+				<button type="reset" class="btn btn-danger col-md-4"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
+			
+				</div>
+			</div>	
+			</form>
+
+	</div>
+         </div>
+            </div>
+        </div>
+    </section>
+    <!--================login_part end =================-->
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'reusable_components/page.html' %}
+
+{% load static %}
+
+<body>
+    {% block content %}
+    
+<div class="container emp-profile">
+        
+ <div class="container">
+  <h2> All Cusmtomer  Manage</h2>
+  <p></p>            
+        <div class="row">
+                                        <div class="col-md-8">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"> </div>
+                                        <div class="panel-body">
+                                            <table class="table table-hover">
+                                            
+                                                <tr class="text-primary">
+                                                    <th>S/N</th>
+                                                    <th>Email</th>
+                                                    <th>Phone</th>
+                                                    <th>City</th>
+                                                    <th>Country</th>
+                                                    <th> ZipCode </th>
+                                                    <th>Street</th>
+                                                    <th>ACTIVE/DEACTIVE</th>
+                                                    <th>Delete</th>
+                                                    
+                                                </tr>
+                                                
+
+                                    <!-- used for User fetch section -->
+                                      {%for User in UsersAccounts %}
+       							
+                                                <tr>
+                                                        <td>{{ forloop.counter}} </td>
+                                                        <td>{{ User.Email }} </td>
+                                                        <td>{{ User.Phone }} </td>	
+                                                        <td>{{ User.City }} </td>												
+                                                        <td>{{ User.Country }} </td>
+                                                        <td>{{ User.zipCode }} </td>	
+                                                        <td>{{ User.Address }} </td>	
+                                                        <td>
+                                                        {% if User.status == 1 %}
+                                                            <button class='genric-btn success'>Active </button>
+                                                            {% else %}
+                                                            
+                                                            <a href='{% url "active_user" %}{{User.Email}}' class='genric-btn primary'>DeActive </a>
+                                        
+                                                            {% endif %}
+                                                        </td>
+                                                        <td>
+                                                            <a href='{% url "delete_user" %}{{User.Email}}' class='genric-btn danger radius'>DELETE </a>
+                                                            </td>
+                                                        <td>
+                                                        <a href='{% url "manage_order" %}{{User.Email}}' class='genric-btn info'>UPDATE</a>
+                                                        </td>
+                                                </tr>
+                                              {% endfor %}	
+
+                                            </table>
+                                            
+                                        </div>
+                                    </div>	
+
+                                    </div>
+                                    
+                                    </div>
+
+</div>
+    </div>
+    <!--================USer Details =================-->
+{% endblock %}

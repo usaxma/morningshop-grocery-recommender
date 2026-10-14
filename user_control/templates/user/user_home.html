@@ -1,0 +1,51 @@
+{% extends 'reusable_components/page.html' %}
+
+{% load static %}
+
+<body>
+    {% block content %}
+    
+<div class="container emp-profile">
+        
+ <div class="container">
+  <h2>Order Details</h2>
+  <p></p>            
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>S/No</th>
+        <th> Name</th>
+        <th> phone</th>
+        <th> Email</th>
+        <th>Address 1</th>
+        <th>Address 2</th>
+        <th>City</th>
+        <th>Country</th>
+        <th>Zip Code</th>
+        <th>total</th>
+        <th></th>
+
+
+    </tr>
+   
+    {%for Order in Orders %}
+        <tr>
+           <td> {{ forloop.counter }}</td>
+            <td> {{Order.shipping_name}}</td>
+            <td>{{Order.shipping_phone}}</td>
+            <td>{{Order.shipping_email}}</td>
+            <td>{{Order.shipping_addr_1}}</td>
+            <td>{{Order.shipping_addr_2}}</td>
+            <td>{{Order.shipping_city}}</td>
+            <td>{{Order.shipping_country}}</td>
+            <td>{{Order.shipping_zip}}</td>
+            <td>{{Order.total}}</td>
+            <td> <a href="/Oder/Detail/{{Order.email}}"/><p class="text-primary">DETAILS</p></a> </td>
+
+        </tr>
+    {% endfor %}
+</table>
+
+</div>
+    </div>
+    <!--================login_part end =================-->
+{% endblock %}

@@ -1,0 +1,5 @@
+Django>=3.2,<4.0
+django-mathfilters>=1.0.0
+python-dotenv>=0.14.0
+pandas>=1.1.0
+numpy>=1.19.0

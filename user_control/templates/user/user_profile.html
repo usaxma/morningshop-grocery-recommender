@@ -1,0 +1,115 @@
+{% extends 'reusable_components/page.html' %}
+
+{% load static %}
+
+<body>
+    {% block content %}
+    
+<div class="container emp-profile">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-4">
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="profile-head" >
+                                    <h4>
+                                        {{ user.mainUser.first_name }} {{ user.mainUser.last_name }}'s Profile
+                                    </h4>
+
+                                    <p class="proile-rating"></p>
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-2 text-right">
+                        <a class="simple-btn" href="{% url 'edit_user' user.mainUser.id %}">Edit Profile</a>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="profile-img">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="tab-content profile-tab" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Username</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user.mainUser.email}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Name</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user.mainUser.first_name}} {{user.mainUser.last_name}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user.mainUser.email}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Phone</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user.Phone}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Country</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user.Country}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>City</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user.City}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Address</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{user.Address}}</p>
+                                            </div>
+                                        </div>
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </form>           
+        </div>
+            <!-----------prifile start--------- -->
+    </section>
+    <!--================login_part end =================-->
+{% endblock %}
